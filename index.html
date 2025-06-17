@@ -124,14 +124,13 @@
             margin-right: auto;
         }
         #daily-quote {
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             font-style: italic;
-            color: #374B6A;
-            margin-bottom: 10px;
-        }
-        #daily-quote-author {
-            color: #684b1b;
-            font-size: 1.07rem;
+            margin: 20px auto 10px auto;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            max-width: 500px;
         }
 
         footer {
@@ -163,8 +162,7 @@
 <main>
     <section class="daily-quote-section" aria-label="Frase diaria motivacional">
         <h2>Frase diaria</h2>
-        <div id="daily-quote">Cargando frase motivacional...</div>
-        <div id="daily-quote-author"></div>
+        <div id="daily-quote"></div>
     </section>
 
     <section id="sobre-mi">
@@ -202,35 +200,31 @@
 </footer>
 
 <script>
-async function fetchDailyQuote() {
-    const quoteDiv = document.getElementById("daily-quote");
-    const authorDiv = document.getElementById("daily-quote-author");
+// Lista de frases motivacionales
+const quotes = [
+  "El éxito es la suma de pequeños esfuerzos repetidos día tras día.",
+  "No cuentes los días, haz que los días cuenten.",
+  "Cree en ti y todo será posible.",
+  "La vida es 10% lo que nos sucede y 90% cómo reaccionamos.",
+  "La motivación nos impulsa a comenzar y el hábito nos permite continuar."
+];
 
-    // Seed basado en la fecha actual (YYYY-MM-DD)
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const dateSeed = `${year}-${month}-${day}`;
-
-    const apiUrl = `https://api.quotable.io/random?tags=motivational|inspirational&seed=${dateSeed}`;
-
-    quoteDiv.innerText = "Cargando frase motivacional..."; // fallback mientras carga
-    authorDiv.innerText = "";
-
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error("No se pudo obtener la frase");
-        const data = await response.json();
-        quoteDiv.innerText = `"${data.content}"`;
-        authorDiv.innerText = `— ${data.author}`;
-    } catch (err) {
-        quoteDiv.innerText = "No se pudo cargar la frase diaria. Intenta de nuevo más tarde.";
-        authorDiv.innerText = "";
-    }
+// Obtener el día del año como índice
+function getDayOfYear() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now - start + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+  return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
-fetchDailyQuote();
+// Seleccionar la frase del día
+function showDailyQuote() {
+  const index = getDayOfYear() % quotes.length;
+  document.getElementById("daily-quote").innerText = quotes[index];
+}
+
+// Mostrar la frase diaria al cargar la página
+showDailyQuote();
 </script>
 
 </body>
