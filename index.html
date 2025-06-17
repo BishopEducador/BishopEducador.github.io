@@ -141,6 +141,31 @@
             color: #6C757D;
             margin-top: 40px;
         }
+
+        /* Estilo adicional para la biblioteca */
+        .biblioteca ul li a {
+            color: #1E3A5F;
+            font-weight: normal;
+        }
+
+        .biblioteca ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .search-box {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box input[type="text"] {
+            width: 80%;
+            max-width: 500px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -155,6 +180,7 @@
     <ul>
         <li><a href="#sobre-mi">Sobre Mí</a></li>
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#biblioteca">Biblioteca</a></li>
         <li><a href="#contacto">Contacto</a></li>
     </ul>
 </nav>
@@ -184,6 +210,24 @@
             <li>Reparación y mantenimiento de computadoras</li>
             <li>Traducciones técnicas inglés-español</li>
             <li>Ayuda en programación básica en Java y C++</li>
+        </ul>
+    </section>
+
+    <!-- Nueva sección: Biblioteca -->
+    <section id="biblioteca" class="biblioteca">
+        <h2>Biblioteca: Uso e Implementación de IA en la Educación</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar documento..." onkeyup="filterDocuments()">
+        </div>
+        <p>Aquí encontrarás recursos seleccionados sobre cómo la inteligencia artificial está transformando la educación:</p>
+        <ul id="documentList">
+            <li data-title="War of the chatbots_ Bard, Bing Chat, ChatGPT, Ernie and beyond: La guerra de los chatbots."><a href="War of the chatbots_ Bard, Bing Chat, ChatGPT, Ernie and beyond. The new AI gold rush and its impact on higher education.pdf"  target="_blank">Documento 1: La guerra de los chatbots</a></li>
+            <li data-title="ChatGPT and Generative AI_ Possibilities: ChatGPT y la IA generativa_ Posibilidades"><a href="ChatGPT and Generative AI_ Possibilities for Its Contribution to Lesson Planning, Critical Thinking and Openness in Teacher Education (1).pdf"  target="_blank">Documento 2: ChatGPT y la IA generativa_ Posibilidades</a></li>
+            <li data-title="AI-Based Chatbots Adoption Model for Higher-Education: Modelo de adopción de chatbots basados ​​en IA para la educación superior"><a href="AI-Based Chatbots Adoption Model for Higher-Education Institutions_ A Hybrid PLS-SEM-Neural Network Modelling Approach.pdf"  target="_blank">Documento 3: Modelo de adopción de chatbots basados ​​en IA para la educación superior</a></li>
+            <li data-title="Artificial Intelligence (AI) in Higher Education_ Growing Academic Integrity and Ethical Concerns: Inteligencia Artificial (IA) en la Educación Superior"><a href="Artificial Intelligence (AI) in Higher Education_ Growing Academic Integrity and Ethical Concerns.pdf"  target="_blank">Documento 4: Inteligencia Artificial (IA) en la Educación Superior</a></li>
+			<li data-title="AI-Based Chatbots Adoption Model for Higher-Education Institutions_ A Hybrid PLS-SEM-Neural Network Modelling Approach: Modelo de adopción de chatbots basados ​​en IA para instituciones de educación superior: un enfoque híbrido de modelado de redes neuronales (PLS-SEM)"><a href="AI-Based Chatbots Adoption Model for Higher-Education Institutions_ A Hybrid PLS-SEM-Neural Network Modelling Approach.pdf"  target="_blank">Documento 5: Modelo de adopción de chatbots basados ​​en IA para instituciones de educación superior: un enfoque híbrido de modelado de redes neuronales (PLS-SEM)</a></li>
+            <li data-title="AI-generated feedback on writing_ insights into efficacy and ENL student preference: Comentarios generados por IA sobre la escritura: perspectivas sobre la eficacia y las preferencias de los estudiantes de inglés como lengua extranjera (ENL)"><a href="AI-generated feedback on writing_ insights into efficacy and ENL student preference.pdf"  target="_blank">Documento 6: Comentarios generados por IA sobre la escritura: perspectivas sobre la eficacia y las preferencias de los estudiantes de inglés como lengua extranjera (ENL)</a></li>
+                        
         </ul>
     </section>
 
@@ -225,6 +269,23 @@ function showDailyQuote() {
 
 // Mostrar la frase diaria al cargar la página
 showDailyQuote();
+
+// Función de búsqueda en la biblioteca
+function filterDocuments() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toLowerCase();
+    const list = document.getElementById('documentList');
+    const items = list.getElementsByTagName('li');
+
+    for (let i = 0; i < items.length; i++) {
+        const title = items[i].getAttribute('data-title').toLowerCase();
+        if (title.includes(filter)) {
+            items[i].style.display = '';
+        } else {
+            items[i].style.display = 'none';
+        }
+    }
+}
 </script>
 
 </body>
