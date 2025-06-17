@@ -161,6 +161,37 @@
 </nav>
 
 <main>
+    <script>
+async function fetchDailyQuote() {
+    const quoteDiv = document.getElementById("daily-quote");
+    const authorDiv = document.getElementById("daily-quote-author");
+
+    // Seed basado en la fecha actual (YYYY-MM-DD)
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const dateSeed = `${year}-${month}-${day}`;
+
+    const apiUrl = `https://api.quotable.io/random?tags=motivational|inspirational&seed=${dateSeed}`;
+
+    quoteDiv.innerText = "Cargando frase motivacional..."; // fallback mientras carga
+    authorDiv.innerText = "";
+
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error("No se pudo obtener la frase");
+        const data = await response.json();
+        quoteDiv.innerText = `"${data.content}"`;
+        authorDiv.innerText = `— ${data.author}`;
+    } catch (err) {
+        quoteDiv.innerText = "No se pudo cargar la frase diaria. Intenta de nuevo más tarde.";
+        authorDiv.innerText = "";
+    }
+}
+
+fetchDailyQuote();
+</script>
     <section class="daily-quote-section" aria-label="Frase diaria motivacional">
         <h2>Frase diaria</h2>
         <div id="daily-quote">Cargando frase motivacional...</div>
@@ -200,38 +231,6 @@
 <footer>
     &copy; 2025 Omar Bishop – Todos los derechos reservados
 </footer>
-
-<script>
-async function fetchDailyQuote() {
-    const quoteDiv = document.getElementById("daily-quote");
-    const authorDiv = document.getElementById("daily-quote-author");
-
-    // Seed basado en la fecha actual (YYYY-MM-DD)
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const dateSeed = `${year}-${month}-${day}`;
-
-    const apiUrl = `https://api.quotable.io/random?tags=motivational|inspirational&seed=${dateSeed}`;
-
-    quoteDiv.innerText = "Cargando frase motivacional..."; // fallback mientras carga
-    authorDiv.innerText = "";
-
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error("No se pudo obtener la frase");
-        const data = await response.json();
-        quoteDiv.innerText = `"${data.content}"`;
-        authorDiv.innerText = `— ${data.author}`;
-    } catch (err) {
-        quoteDiv.innerText = "No se pudo cargar la frase diaria. Intenta de nuevo más tarde.";
-        authorDiv.innerText = "";
-    }
-}
-
-fetchDailyQuote();
-</script>
 
 </body>
 </html>
