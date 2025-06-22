@@ -1,9 +1,9 @@
 const quotes = [
-  "El éxito es la suma de pequeños esfuerzos repetidos día tras día.",
-  "No cuentes los días, haz que los días cuenten.",
-  "Cree en ti y todo será posible.",
-  "La vida es 10% lo que nos sucede y 90% cómo reaccionamos.",
-  "La motivación nos impulsa a comenzar y el hábito nos permite continuar."
+  "No podemos resolver nuestros problemas con el mismo razonamiento que usamos cuando los creamos. — Albert Einstein",
+  "Vive como si fueras a morir mañana; aprende como si fueras a vivir siempre. — Mahatma Gandhi",
+  "Cambia tus pensamientos y cambiarás tu mundo. — Norman Vincent Peale",
+  "Es mejor fallar en la originalidad que triunfar en la imitación. — Herman Melville",
+  "Desarrolla el éxito a partir de los fracasos. El desaliento y el fracaso son los peldaños hacia el éxito. — Dale Carnegie"
 ];
 
 // Obtener el día del año como índice
